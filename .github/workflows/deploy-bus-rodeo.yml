@@ -1,0 +1,56 @@
+name: Deploy Bus Rodeo Scorer
+
+on:
+  push:
+    branches: [claude/bus-rodeo-scoring-app-BS7f2, main]
+    paths: [bus-rodeo/**]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: claude/bus-rodeo-scoring-app-BS7f2
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: bus-rodeo/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+        working-directory: bus-rodeo
+
+      - name: Build
+        run: npm run build
+        working-directory: bus-rodeo
+        env:
+          NODE_ENV: production
+
+      - name: Copy PWA files to dist
+        run: cp public/sw.js public/manifest.json public/icon-192.png public/icon-512.png public/icon.svg dist/
+        working-directory: bus-rodeo
+
+      - uses: actions/configure-pages@v4
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: bus-rodeo/dist
+
+      - id: deploy
+        uses: actions/deploy-pages@v4
