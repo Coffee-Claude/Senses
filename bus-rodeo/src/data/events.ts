@@ -14,7 +14,7 @@ export const EVENT_DEFS: EventDef[] = [
   { key: 'written_inspection', label: 'Vehicle Inspection Written Test', maxPoints: 100 },
   { key: 'offset_alley', label: 'Offset Alley', maxPoints: 75, timed: true, timeLimitSec: 120 },
   { key: 'rxr_crossing', label: 'RXR Grade Crossing', maxPoints: 75 },
-  { key: 'right_turn', label: 'Right Turn', maxPoints: 75, timed: true, timeLimitSec: 15 },
+  { key: 'right_turn', label: 'Right Turn', maxPoints: 50, timed: true, timeLimitSec: 15 },
   { key: 'straight_line', label: 'Straight Line', maxPoints: 50 },
   { key: 'diminishing_clearance', label: 'Diminishing Clearance', maxPoints: 50 },
   { key: 'backup_stall', label: 'Back Up Stall', maxPoints: 50, timed: true, timeLimitSec: 180 },
