@@ -12,7 +12,7 @@ export default function Home({ onSelect, onCreate }: Props) {
   const [competitions, setCompetitions] = useState<Competition[]>([])
 
   useEffect(() => {
-    db.competitions.orderBy('createdAt').reverse().toArray().then(setCompetitions)
+    db.competitions.orderBy('id').reverse().toArray().then(setCompetitions)
   }, [])
 
   async function deleteComp(e: React.MouseEvent, id: number) {
