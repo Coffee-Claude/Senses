@@ -3,7 +3,6 @@ name: Deploy Bus Rodeo Scorer
 on:
   push:
     branches: [claude/bus-rodeo-scoring-app-BS7f2, main]
-    paths: [bus-rodeo/**]
   workflow_dispatch:
 
 permissions:
